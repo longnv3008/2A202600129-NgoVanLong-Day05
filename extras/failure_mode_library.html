@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Failure Mode Library — Chatbot CSKH Ngân hàng</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-light: #2a3d66;
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --blue-accent: #3b82f6;
+    --bg: #ffffff;
+    --bg-alt: #f7f8fb;
+    --bg-highlight: #eef3ff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: #f1f5f9;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 32px 16px;
+  }
+
+  .slide {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* Header */
+  .slide-header {
+    padding: 40px 48px 28px;
+  }
+
+  .slide-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+
+  .slide-header .subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .slide-header .subtitle .arrow { color: var(--text-muted); margin: 0 4px; }
+
+  /* Product brief */
+  .product-brief {
+    margin: 0 48px 24px;
+    padding: 16px 20px;
+    background: var(--bg-alt);
+    border-left: 4px solid var(--navy);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .product-brief strong {
+    color: var(--navy);
+  }
+
+  /* Case study */
+  .case-study {
+    margin: 0 48px 12px;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, #fef2f2, #fff5f5);
+    border-radius: 10px;
+    border: 1px solid #fecaca;
+  }
+
+  .case-study .case-title {
+    font-weight: 700;
+    color: var(--red);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .case-study .case-desc {
+    font-size: 14px;
+    color: #7f1d1d;
+    line-height: 1.7;
+  }
+
+  .case-study .case-lesson {
+    margin-top: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--red);
+  }
+
+  .case-study .arrow-icon { margin: 0 4px; opacity: 0.7; }
+
+  /* Section label */
+  .section-label {
+    margin: 28px 48px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .section-label span {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Table */
+  .table-wrap {
+    margin: 0 48px 32px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 20px 8px;
+    font-size: 14.5px;
+  }
+
+  thead th .th-sub {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: var(--bg-alt); }
+
+  tbody td {
+    padding: 16px 20px;
+    vertical-align: top;
+    line-height: 1.65;
+  }
+
+  tbody td:first-child {
+    font-weight: 500;
+    color: var(--navy);
+    width: 26%;
+  }
+
+  tbody td:nth-child(2) {
+    width: 40%;
+    color: #374151;
+  }
+
+  tbody td:nth-child(3) {
+    width: 34%;
+    color: #1e40af;
+    font-weight: 500;
+  }
+
+  .arrow { color: var(--text-muted); margin: 0 3px; font-size: 13px; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  .tag-danger { background: #fee2e2; color: #991b1b; }
+  .tag-warn { background: #fef3c7; color: #92400e; }
+  .tag-info { background: #dbeafe; color: #1e40af; }
+
+  /* Closing question */
+  .closing {
+    margin: 0 48px 36px;
+    padding: 18px 24px;
+    background: var(--bg-highlight);
+    border-left: 4px solid var(--blue-accent);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .closing .closing-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+
+  .closing .closing-question {
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .slide-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 48px;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  .slide-footer .page { font-weight: 600; }
+
+  /* Emphasis */
+  em { font-style: normal; color: var(--red-light); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="slide">
+
+  <!-- Header -->
+  <div class="slide-header">
+    <h1>Các dạng lỗi thường gặp (Failure Mode Library)</h1>
+    <div class="subtitle">Thay vì liệt kê tính năng <span class="arrow">→</span> liệt kê cách sản phẩm có thể sai</div>
+  </div>
+
+  <!-- Product Brief -->
+  <div class="product-brief">
+    <strong>Đề bài — Chatbot CSKH Ngân hàng:</strong> "Chatbot trả lời câu hỏi khách hàng về tài khoản, thẻ, vay. Hiểu tiếng Việt có dấu và không dấu. Phản hồi trong 3 giây. Hỗ trợ 24/7."
+  </div>
+
+  <!-- Case Study -->
+  <div class="case-study">
+    <div class="case-title">⚠ Air Canada (2024):</div>
+    <div class="case-desc">
+      Chatbot tự bịa chính sách hoàn vé <span class="arrow-icon">→</span> khách đòi đúng lời bot <span class="arrow-icon">→</span> tòa phán: "Bot là đại diện công ty. Phải bồi thường."
+    </div>
+    <div class="case-lesson">→ AI sai ≠ bug nhỏ. AI sai = công ty chịu trách nhiệm.</div>
+  </div>
+
+  <!-- Section Label -->
+  <div class="section-label">Vậy phải chuẩn bị trước — liệt kê cách Chatbot CSKH Ngân hàng có thể sai:</div>
+
+  <!-- Failure Mode Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Khi nào xảy ra <span class="th-sub">(trigger)</span></th>
+          <th>Chuyện gì xảy ra <span class="th-sub">(hậu quả)</span></th>
+          <th>Xử lý thế nào <span class="th-sub">(mitigation)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Row 1 -->
+        <tr>
+          <td>
+            <span class="tag tag-danger">Ngoài phạm vi</span><br>
+            Khách hỏi: "Cổ phiếu VNM có nên mua không?"
+          </td>
+          <td>
+            Bot "nhiệt tình" trả lời tư vấn đầu tư <span class="arrow">→</span> khách làm theo bị lỗ <span class="arrow">→</span> khiếu nại ngân hàng <span class="arrow">→</span> <em>rủi ro pháp lý nghiêm trọng</em>
+          </td>
+          <td>
+            Nhận ra ngoài phạm vi <span class="arrow">→</span> "Tôi chỉ hỗ trợ về tài khoản, thẻ và vay. Để được tư vấn đầu tư, vui lòng liên hệ bộ phận Chứng khoán tại hotline 1900 xxxx."
+          </td>
+        </tr>
+        <!-- Row 2 -->
+        <tr>
+          <td>
+            <span class="tag tag-danger">Hallucination</span><br>
+            Khách hỏi: "Lãi suất vay mua nhà hiện tại bao nhiêu?"
+          </td>
+          <td>
+            Bot bịa lãi suất 6.8%/năm (thực tế đã tăng lên 8.2%) <span class="arrow">→</span> khách ký hợp đồng dựa trên số sai <span class="arrow">→</span> tranh chấp, <em>mất uy tín ngân hàng</em>
+          </td>
+          <td>
+            Truy vấn real-time từ database lãi suất <span class="arrow">→</span> "Lãi suất vay mua nhà hiện tại từ 8.2%/năm. Cập nhật lần cuối: 08/04/2026. Vui lòng xác nhận lại với chi nhánh trước khi ký hợp đồng."
+          </td>
+        </tr>
+        <!-- Row 3 -->
+        <tr>
+          <td>
+            <span class="tag tag-warn">Mơ hồ ngữ cảnh</span><br>
+            Khách nhắn: "Tôi bị mất thẻ"
+          </td>
+          <td>
+            Bot hiểu sai loại thẻ — hướng dẫn khóa thẻ tín dụng trong khi khách mất thẻ ATM <span class="arrow">→</span> thẻ ATM vẫn bị kẻ gian rút tiền <span class="arrow">→</span> <em>thiệt hại tài chính cho khách</em>
+          </td>
+          <td>
+            Hỏi clarify trước khi hành động <span class="arrow">→</span> "Bạn muốn khóa loại thẻ nào? 1️⃣ Thẻ ATM/Ghi nợ 2️⃣ Thẻ tín dụng. Hoặc nhấn 0 để kết nối nhân viên ngay."
+          </td>
+        </tr>
+        <!-- Row 4 -->
+        <tr>
+          <td>
+            <span class="tag tag-warn">Tiếng Việt không dấu</span><br>
+            Khách gõ: "so du" hoặc "tat toan"
+          </td>
+          <td>
+            Bot không nhận diện được ý định <span class="arrow">→</span> trả lời "Tôi không hiểu" liên tục <span class="arrow">→</span> khách bực, <em>bỏ cuộc hoặc đánh giá 1 sao</em>
+          </td>
+          <td>
+            Normalize input (bỏ dấu → mapping) + fuzzy matching <span class="arrow">→</span> "Bạn muốn kiểm tra số dư tài khoản? Vui lòng xác nhận: Có / Không."
+          </td>
+        </tr>
+        <!-- Row 5 -->
+        <tr>
+          <td>
+            <span class="tag tag-info">Quá tải / Timeout</span><br>
+            Cuối tháng, hàng nghìn khách hỏi lương về chưa cùng lúc
+          </td>
+          <td>
+            Phản hồi vượt 3 giây cam kết <span class="arrow">→</span> khách không nhận được trả lời <span class="arrow">→</span> tràn sang hotline <span class="arrow">→</span> <em>sập cả 2 kênh</em>
+          </td>
+          <td>
+            Auto-scale + queue ưu tiên + thông báo chờ <span class="arrow">→</span> "Hệ thống đang bận. Bạn đang ở vị trí #12 trong hàng chờ. Thời gian ước tính: ~30 giây."
+          </td>
+        </tr>
+        <!-- Row 6 -->
+        <tr>
+          <td>
+            <span class="tag tag-danger">Rò rỉ thông tin</span><br>
+            Khách hỏi: "Cho tôi xem giao dịch gần nhất"
+          </td>
+          <td>
+            Bot trả lại thông tin giao dịch mà <strong>chưa xác thực</strong> danh tính <span class="arrow">→</span> kẻ gian lợi dụng <span class="arrow">→</span> <em>vi phạm bảo mật dữ liệu khách hàng</em>
+          </td>
+          <td>
+            Bắt buộc xác thực trước khi trả dữ liệu nhạy cảm <span class="arrow">→</span> "Để bảo mật, vui lòng xác thực qua OTP gửi đến SĐT đăng ký. Tôi đã gửi mã — bạn nhập giúp nhé."
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <div class="closing-label">Câu hỏi then chốt</div>
+    <div class="closing-question">Top 3 cách sản phẩm Chatbot CSKH Ngân hàng của bạn có thể sai là gì? Và bạn đã chuẩn bị mitigation chưa?</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span>Instructor: [Tên giảng viên]</span>
+    <span>AI in Action – Day 05</span>
+    <span class="page">18 / 52</span>
+  </div>
+
+</div>
+
+</body>
+</html>
